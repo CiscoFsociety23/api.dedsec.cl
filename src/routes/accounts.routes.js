@@ -31,4 +31,27 @@ router.post('/create', VerifyObject, async (req, res) => {
     }
 })
 
+router.patch('/update/:id', VerifyObject, async (req, res) => {
+    try {
+        const  { id } = req.params
+        const account = req.body
+        const UpdateAccount = await Account_Service.UpdateAccount(id, account)
+        res.json(UpdateAccount)
+    } catch (error) {
+        console.log(error)
+        res.json({ mensaje: 'Ha occurrido un error.' })
+    }
+})
+
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const DeleteAccount = await Account_Service.DeleteAccount(id)
+        res.json(DeleteAccount)
+    } catch (error) {
+        console.log(error)
+        res.json({ mensaje: 'Ha occurrido un error.' })
+    }
+})
+
 export default router
