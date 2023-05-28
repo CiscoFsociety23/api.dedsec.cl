@@ -4,8 +4,9 @@ const router = express.Router()
 import AccountService from '../services/accounts.service.js'
 const Account_Service = new AccountService()
 
-router.get('/', async (req, res) => {
+import { VerifyObject } from '../middlewares/accounts.mid.js'
 
+router.get('/', async (req, res) => {
     try {
         const accounts = await Account_Service.GetAccounts()
         if (accounts.length === 0){
@@ -17,7 +18,17 @@ router.get('/', async (req, res) => {
         console.log(error)
         res.json({ mensaje: 'Ha occurrido un error.' })
     }
+})
 
+router.post('/create', VerifyObject, async (req, res) => {
+    try {
+        const account = req.body
+        const CreateAccount = await Account_Service.CreateAccount(account)
+        res.json(CreateAccount)
+    } catch (error) {
+        console.log(error)
+        res.json({ mensaje: 'Ha occurrido un error.' })
+    }
 })
 
 export default router
