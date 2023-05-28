@@ -43,4 +43,15 @@ router.patch('/update/:id', VerifyObject, async (req, res) => {
     }
 })
 
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const DeleteAccount = await Account_Service.DeleteAccount(id)
+        res.json(DeleteAccount)
+    } catch (error) {
+        console.log(error)
+        res.json({ mensaje: 'Ha occurrido un error.' })
+    }
+})
+
 export default router

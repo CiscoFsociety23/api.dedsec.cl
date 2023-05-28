@@ -27,6 +27,17 @@ class AccountService {
         }
     }
 
+    async DeleteAccount(id){
+        const DeleteAccount = await database.query(`DELETE FROM dedsec.accounts WHERE id =${id};`)
+        if (DeleteAccount.affectedRows === 0){
+            const AccountDeleted = { mensaje: `El cuenta ${id} no existe.` }
+            return AccountDeleted
+        } else {
+            const AccountDeleted = { mensaje: 'Cuenta borrada con exito', id: id }
+            return AccountDeleted
+        }
+    }
+
 }
 
 export default AccountService
