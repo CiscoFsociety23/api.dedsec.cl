@@ -1,0 +1,31 @@
+{
+  "name": "api.dedsec.cl",
+  "version": "0.0.0",
+  "description": "API Dedsec Corp.",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CiscoFsociety23/api.dedsec.cl"
+  },
+  "bugs": {
+    "url": "https://github.com/CiscoFsociety23/api.dedsec.cl/issues"
+  },
+  "author": "Marco Figueroa",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.2.3",
+    "nodejs-base64-converter": "^1.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
