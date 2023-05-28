@@ -15,6 +15,29 @@ class AccountService {
         return AccountCreated
     }
 
+    async UpdateAccount(id, account){
+        const passwd = buffer.encode(account.passwd)
+        const UpdateAccount = await database.query(`UPDATE dedsec.accounts SET name='${account.name}', email='${account.email}', passwd='${passwd}' WHERE id=${id};`)
+        if (UpdateAccount.affectedRows === 0){
+            const AccountUpdated = { mensaje: `El cuenta ${id} no existe.` }
+            return AccountUpdated
+        } else {
+            const AccountUpdated = { mensaje: 'Cuenta actualizada con exito', cuenta: { id: id, nombre: account.name, email: account.email } }
+            return AccountUpdated
+        }
+    }
+
+    async DeleteAccount(id){
+        const DeleteAccount = await database.query(`DELETE FROM dedsec.accounts WHERE id =${id};`)
+        if (DeleteAccount.affectedRows === 0){
+            const AccountDeleted = { mensaje: `El cuenta ${id} no existe.` }
+            return AccountDeleted
+        } else {
+            const AccountDeleted = { mensaje: 'Cuenta borrada con exito', id: id }
+            return AccountDeleted
+        }
+    }
+
 }
 
 export default AccountService
