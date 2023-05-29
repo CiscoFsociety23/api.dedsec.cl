@@ -1,6 +1,6 @@
 {
   "name": "api.dedsec.cl",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "API Dedsec Corp.",
   "main": "src/index.js",
   "scripts": {
