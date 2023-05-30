@@ -4,7 +4,7 @@ import database from '../database.js'
 class AccountService {
 
     async GetAccounts(){
-        const GetAccounts = await database.query(`SELECT id, name, email FROM dedsec.accounts;`)
+        const GetAccounts = await database.query(`SELECT id, name, email FROM dedsec.accounts ORDER BY id DESC;`)
         return GetAccounts
     }
 
@@ -36,6 +36,16 @@ class AccountService {
             const AccountDeleted = { mensaje: 'Cuenta borrada con exito', id: id }
             return AccountDeleted
         }
+    }
+
+    async GetAccountById(id){
+        const GetAccountById = await database.query(`SELECT id, name, email FROM dedsec.accounts WHERE id=${id};`)
+        return GetAccountById
+    }
+
+    async GetAccountByEmail(email){
+        const GetAccountByEmail = await database.query(`SELECT id, name, email FROM dedsec.accounts WHERE email='${email}';`)
+        return GetAccountByEmail
     }
 
 }

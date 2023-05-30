@@ -7,4 +7,22 @@ function VerifyObject(req, res, next){
     }
 }
 
-export { VerifyObject }
+function VerifyId(req, res, next){
+    const { id } = req.params
+    if (id === ':id'){
+        res.json({ mensaje: 'Debe proporcionar un id' })
+    } else {
+        next()
+    }
+}
+
+function VerifyEmail(req, res, next){
+    const { email } = req.params
+    if (email === ':email'){
+        res.json({ mensaje: 'Debe proporcionar un correo electronico' })
+    } else {
+        next()
+    }
+}
+
+export { VerifyObject, VerifyId, VerifyEmail }
