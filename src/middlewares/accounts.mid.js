@@ -16,4 +16,13 @@ function VerifyId(req, res, next){
     }
 }
 
-export { VerifyObject, VerifyId }
+function VerifyEmail(req, res, next){
+    const { email } = req.params
+    if (email === ':email'){
+        res.json({ mensaje: 'Debe proporcionar un correo electronico' })
+    } else {
+        next()
+    }
+}
+
+export { VerifyObject, VerifyId, VerifyEmail }

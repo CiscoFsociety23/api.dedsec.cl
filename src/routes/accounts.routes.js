@@ -4,7 +4,7 @@ const router = express.Router()
 import AccountService from '../services/accounts.service.js'
 const Account_Service = new AccountService()
 
-import { VerifyObject, VerifyId } from '../middlewares/accounts.mid.js'
+import { VerifyObject, VerifyId, VerifyEmail } from '../middlewares/accounts.mid.js'
 
 router.get('/', async (req, res) => {
     try {
@@ -59,9 +59,24 @@ router.get('/get-by-id/:id', VerifyId, async (req, res) => {
         const { id } = req.params
         const GetAccountById = await Account_Service.GetAccountById(id)
         if (GetAccountById.length === 0){
-            res.json({ mensaje: 'No hay cuenta con ese id' })
+            res.json({ mensaje: 'No hay cuenta creada con ese id' })
         } else {
             res.json(GetAccountById)
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({ mensaje: 'Ha occurrido un error.' })
+    }
+})
+
+router.get('/get-by-email/:email', VerifyEmail, async (req, res) => {
+    try {
+        const { email } = req.params
+        const GetAccountByEmail = await Account_Service.GetAccountByEmail(email)
+        if (GetAccountByEmail.length === 0){
+            res.json({ mensaje: 'No hay cuenta creada con ese email' })
+        } else {
+            res.json(GetAccountByEmail)
         }
     } catch (error) {
         console.log(error)
