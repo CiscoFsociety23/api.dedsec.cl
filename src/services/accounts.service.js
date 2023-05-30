@@ -38,6 +38,11 @@ class AccountService {
         }
     }
 
+    async GetAccountById(id){
+        const GetAccountById = await database.query(`SELECT id, name, email FROM dedsec.accounts WHERE id=${id};`)
+        return GetAccountById
+    }
+
 }
 
 export default AccountService

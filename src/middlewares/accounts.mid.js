@@ -7,4 +7,13 @@ function VerifyObject(req, res, next){
     }
 }
 
-export { VerifyObject }
+function VerifyId(req, res, next){
+    const { id } = req.params
+    if (id === ':id'){
+        res.json({ mensaje: 'Debe proporcionar un id' })
+    } else {
+        next()
+    }
+}
+
+export { VerifyObject, VerifyId }
