@@ -8,21 +8,13 @@ function VerifyObject(req, res, next){
 }
 
 function VerifyId(req, res, next){
-    const { id } = req.params
-    if (id === ':id'){
-        res.json({ mensaje: 'Debe proporcionar un id' })
-    } else {
-        next()
-    }
+    const id = req.query.id
+    !id ? res.json({ mensaje: 'Debe proporcionar un id' }) : next()
 }
 
 function VerifyEmail(req, res, next){
-    const { email } = req.params
-    if (email === ':email'){
-        res.json({ mensaje: 'Debe proporcionar un correo electronico' })
-    } else {
-        next()
-    }
+    const email = req.query.email
+    !email ? res.json({ mensaje: 'Debe proporcionar un correo electronico' }) : next()
 }
 
 export { VerifyObject, VerifyId, VerifyEmail }
