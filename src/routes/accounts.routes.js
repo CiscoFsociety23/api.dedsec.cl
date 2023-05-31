@@ -31,9 +31,9 @@ router.post('/create', VerifyObject, async (req, res) => {
     }
 })
 
-router.patch('/update/:id', VerifyId, VerifyObject, async (req, res) => {
+router.patch('/update', VerifyId, VerifyObject, async (req, res) => {
     try {
-        const  { id } = req.params
+        const id = req.query.id
         const account = req.body
         const UpdateAccount = await Account_Service.UpdateAccount(id, account)
         res.json(UpdateAccount)
