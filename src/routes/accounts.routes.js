@@ -43,9 +43,9 @@ router.patch('/update/:id', VerifyId, VerifyObject, async (req, res) => {
     }
 })
 
-router.delete('/delete/:id', VerifyId, async (req, res) => {
+router.delete('/delete', VerifyId, async (req, res) => {
     try {
-        const { id } = req.params
+        const id = req.query.id
         const DeleteAccount = await Account_Service.DeleteAccount(id)
         res.json(DeleteAccount)
     } catch (error) {
