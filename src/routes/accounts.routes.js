@@ -65,15 +65,11 @@ router.get('/get-by-id', VerifyId, async (req, res) => {
     }
 })
 
-router.get('/get-by-email/:email', VerifyEmail, async (req, res) => {
+router.get('/get-by-email', VerifyEmail, async (req, res) => {
     try {
-        const { email } = req.params
+        const email = req.query.email
         const GetAccountByEmail = await Account_Service.GetAccountByEmail(email)
-        if (GetAccountByEmail.length === 0){
-            res.json({ mensaje: 'No hay cuenta creada con ese email' })
-        } else {
-            res.json(GetAccountByEmail)
-        }
+        GetAccountByEmail.length === 0 ? res.json({ mensaje: 'No hay cuenta creada con ese email' }) : res.json(GetAccountByEmail)
     } catch (error) {
         console.log(error)
         res.json({ mensaje: 'Ha occurrido un error.' })
