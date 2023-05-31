@@ -54,15 +54,11 @@ router.delete('/delete/:id', VerifyId, async (req, res) => {
     }
 })
 
-router.get('/get-by-id/:id', VerifyId, async (req, res) => {
+router.get('/get-by-id', VerifyId, async (req, res) => {
     try {
-        const { id } = req.params
+        const id = req.query.id
         const GetAccountById = await Account_Service.GetAccountById(id)
-        if (GetAccountById.length === 0){
-            res.json({ mensaje: 'No hay cuenta creada con ese id' })
-        } else {
-            res.json(GetAccountById)
-        }
+        GetAccountById.length === 0 ? res.json({ mensaje: 'No hay cuenta creada con ese id' }) : res.json(GetAccountById)
     } catch (error) {
         console.log(error)
         res.json({ mensaje: 'Ha occurrido un error.' })
